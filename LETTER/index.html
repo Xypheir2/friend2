@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbox</title>
+
+    <!-- Tab color -->
+    <meta name="theme-color" content="#6c5ce7"> 
+
+    <!-- Logo -->
+    <link rel="icon" href="images/cat.png" type="image/png">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Notification div -->
+        <div id="notification" class="notification">
+            🔔 You Received a new letter!
+        </div>
+        
+        <div class="envelope-wrapper">
+            <div class="envelope">
+                <div class="letter">
+                    <div class="text">
+            <!-- Letter content -->
+            <p><strong>Dear Rey,</strong></p>
+            <p>
+                I wanted to send you a little something I made before the year ends, and I truly hope it brings a smile to your face. 
+                I’ve been reflecting, and I wanted to take a moment to express just how grateful I am.
+            </p>
+            <p>
+                We’ve been through so much together, and your presence in my life has been a constant source of strength and comfort. You've always been there for me, even when I’ve been withdrawn. You've listened without judgment, made me laugh when I needed it the most, and been my rock during my toughest days. I honestly don’t know what I would’ve done without you. You’ve given me comfort and support that I can never fully put into words.
+            </p>
+            <p>
+                I know you have your own struggles, too, and I’m sorry for not always being the friend you needed in return. I want you to know, though, that I see you. I see the battles you face, and I’m here for you, just like you’ve always been here for me. You don’t have to go through things alone—I’ll always be by your side, no matter what. 
+            </p>
+            <p>
+                There’s a song that’s been on my mind lately. No actually it's my favorite song, “Little Runaway” by Benson Boone. The lyrics speak to me in a way that I feel I need to share with you:
+            </p>
+            <blockquote>
+                "Little runaway, the world’s never easy<br>
+                You’re so good at being down on yourself<br>
+                And the fog makes it harder to see me<br>
+                You don’t know where to reach out for help."
+            </blockquote>
+            <p>
+                I know that life can sometimes feel like an endless struggle, and it’s easy to get lost in the confusion and pain. But I want you to know, whenever you feel like you’re running away from everything, I’m here. I’m here to help you find your way, to be the light in the fog, and to remind you that you're never alone. 
+            </p>
+            <blockquote>
+                "Won’t you come and we can stare at the stars<br>
+                And look at the comets from the roof of my car<br>
+                Little runaway, I know it’s been hard<br>
+                You’re trying your best but you keep falling apart<br>
+                Lay your problems right here, let them all disappear."
+            </blockquote>
+            <p>
+                No matter how many times you feel like you're falling apart, I’ll always be here for you, ready to listen, ready to help you put things back together. I want you to always feel safe with me, to share your heart and your worries, just like you did to me. Because you deserve all the love and care this world has to offer.
+            </p>
+            <p>
+                Another song that’s been on my mind lately is “Youtiful” by Stray Kids. The title itself says it all—“You” and “Beautiful” combined. It’s a reminder that no matter what happens, you are beautiful, inside and out.
+            </p>
+            <blockquote>
+                "You know whenever there's a chance<br>
+                I'll tell you that you're amazing as you are<br>
+                'Cause when you give me a glance<br>
+                I'm sure that I see the universe in your eyes<br>
+                Don’t you ever tell yourself that you’re not enough<br>
+                I am certain that you're truly fine<br>
+                You are a miracle, miracle<br>
+                You are youtiful."
+            </blockquote>
+            <p>
+                I want to encourage you to love yourself the way you deserve. You are more than enough, just as you are. You are a miracle, and your worth cannot be measured by anything other than the incredible person you are. Don't change yourself for others, change yourself for you.
+            </p>
+            <p>
+                As we move into the new year, I hope we continue being friends. I promise that I’ll do better, be more present, and stop pushing others away. Thank you for being such a meaningful part of my life. I look forward to more laughs, more memories, and more support from each other in the days ahead. Thank you!
+            </p>
+            <p>With all my heart,</p>
+            <p><strong>Ness</strong></p>
+                        <!-- Spotify -->
+                        <div class="spotify-code">
+                            <img src="images/spotify.png" alt="Spotify QR Code">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="envelope-shadow"></div>
+            <div class="circle"></div>
+        </div>
+
+        <!-- Q&A Section -->
+        <div class="qa-container" style="display: none;">
+            <div id="question" class="qa-question">
+                Would you like to continue being friends with the creator?
+            </div>
+            <button id="yes-btn-qa" class="qa-btn">Yes</button>
+            <button id="no-btn-qa" class="qa-btn">No</button>
+        </div>
+    </div>
+
+    <!-- GIFs and Container -->
+    <div id="gif-container" style="display: none;">
+        <img id="yes-gif" src="gif/yes-gif.gif" style="display: none;">
+        <img id="no-gif" src="gif/no-gif.gif" style="display: none;">
+    </div>
+
+    <script>
+        window.onload = function() {
+            const notification = document.getElementById('notification');
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 4000); // Hide after 4 seconds
+        };
+
+        const circle = document.querySelector('.circle');
+        const letter = document.querySelector('.letter');
+
+        // Open the letter when the circle is clicked
+        circle.addEventListener('click', function () {
+            letter.classList.add('show');
+        });
+
+        const envelopeWrapper = document.querySelector('.envelope-wrapper');
+        envelopeWrapper.addEventListener('click', () => {
+            envelopeWrapper.classList.toggle('flap');
+        });
+
+        // Q&A logic
+        let questionContainer = document.getElementById('question');
+        let yesBtn = document.getElementById('yes-btn-qa');
+        let noBtn = document.getElementById('no-btn-qa');
+
+        // Show the Q&A section only when the letter is scrolled to the bottom
+        let letterElement = document.querySelector('.letter');
+        let qaContainer = document.querySelector('.qa-container');
+
+        // Check if the user has scrolled to the bottom of the letter
+        letterElement.addEventListener('scroll', function() {
+            // Allow a small buffer (10px) to account for rendering discrepancies
+            if (letterElement.scrollHeight - letterElement.scrollTop <= letterElement.clientHeight + 10) {
+                qaContainer.style.display = 'block';
+            }
+        });
+
+
+        // "Yes" button
+        yesBtn.addEventListener('click', function() {
+            questionContainer.textContent = "HOORAY! Membership Extended!🎉";
+            yesBtn.style.display = 'none';
+            noBtn.style.display = 'none';
+
+            // Fireworks GIF
+            document.getElementById('yes-gif').style.display = 'block';
+            document.getElementById('no-gif').style.display = 'none';
+            document.getElementById('gif-container').style.display = 'block';
+            document.body.style.transition = 'background-image 1s ease-in-out';
+            document.body.style.backgroundImage = 'url("gif/fireworks.gif")';
+            document.body.style.backgroundSize = 'cover';
+
+            // Dark overlay
+            let overlay = document.createElement('div');
+            overlay.id = 'dark-overlay';
+            overlay.style.position = 'absolute';
+            overlay.style.top = '0';
+            overlay.style.left = '0';
+            overlay.style.width = '100%';
+            overlay.style.height = '100%';
+            overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+            overlay.style.zIndex = '999';
+            overlay.style.transition = 'opacity 1s ease-in-out';
+            document.body.appendChild(overlay);
+
+            // Transition
+            setTimeout(function() {
+                document.body.style.transition = 'background-image 1s ease-in-out';
+                document.body.style.backgroundImage = '';
+                overlay.style.opacity = '0';
+                setTimeout(() => overlay.remove(), 1000);
+            }, 10000); //10sec
+        });
+
+        // "No" button
+        noBtn.addEventListener('click', function () {
+            const container = document.querySelector('.qa-container');
+            const containerRect = container.getBoundingClientRect();
+            const offsetX = Math.random() > 0.5 ? 150 : -150;
+            const offsetY = Math.random() > 0.5 ? 100 : -100;
+            noBtn.style.transition = 'transform 0.5s ease';
+            noBtn.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+
+            // GIF
+            document.getElementById('no-gif').style.display = 'block';
+            document.getElementById('yes-gif').style.display = 'none';
+            document.getElementById('gif-container').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
